@@ -63,8 +63,17 @@
     if(!audio) return; // this stops the function from running all together
     audio.currentTime = 0;
     audio.play()
-    key.classList.add('playing')
-    console.log(key)
+
+    key.classList.add('playing') //.classList.add() is nifty why to add classes to elements 
+
+    function removeTransition(e) {
+      if(e.propertyName !== 'transform') return; // this will skip a transition if its not a transform
+      this.classList.remove('playing') // this is equal to what key ---- this is equal to what got called against it 
+                                // for instance line 75 KEY.addEventListener the event listener is being called on key
+    } 
+
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition))
   });
 </script>
 
